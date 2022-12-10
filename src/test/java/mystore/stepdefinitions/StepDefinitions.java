@@ -1,5 +1,6 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,15 +9,13 @@ import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
 import mystore.constants.Constants;
 import mystore.questions.MyAccountPage;
+import mystore.questions.LoginPageQuestion;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -52,6 +51,28 @@ public class StepDefinitions {
         actor.should(
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+
+    @Then("{actor} should see the login section title")
+    public void heShouldSeeTheLoginSectionTitle(Actor actor) {
+        actor.attemptsTo(
+                WaitUntil.the(LoginPage.LOGIN_PAGE_TITLE, isVisible()).forNoMoreThan(30).seconds()
+        );
+        actor.should(
+                seeThat("Page", LoginPageQuestion.loginSectionTitle(),
+                        equalTo(Constants.LOGIN_PAGE_TITLE))
+        );
+    }
+
+    @And("{actor} should see the warning for a wrong login attempt")
+    public void heShouldSeeTheWarningForAWrongLoginAttempt(Actor actor) {
+        actor.attemptsTo(
+                WaitUntil.the(LoginPage.WRONG_LOGIN_WARNING, isVisible()).forNoMoreThan(30).seconds()
+        );
+        actor.should(
+                seeThat("Page", LoginPageQuestion.wrongLoginWarning(),
+                        equalTo(Constants.WRONG_LOGIN_WARNING))
         );
     }
 }
