@@ -7,8 +7,9 @@ import io.cucumber.java.en.When;
 import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
+import mystore.actions.WaitUtilElementIsVisible;
 import mystore.constants.Constants;
-import mystore.questions.MyAccountPage;
+import mystore.questions.MyAccountPageQuestion;
 import mystore.questions.LoginPageQuestion;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
@@ -49,15 +50,20 @@ public class StepDefinitions {
     @Then("{actor} should see log in status correctly")
     public void should_see_login_status(Actor actor) {
         actor.should(
-                seeThat("Page", MyAccountPage.loginStatus(),
+                seeThat("Page", MyAccountPageQuestion.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
         );
     }
 
     @Then("{actor} should see the login section title")
     public void heShouldSeeTheLoginSectionTitle(Actor actor) {
+        /*
         actor.attemptsTo(
                 WaitUntil.the(LoginPage.LOGIN_PAGE_TITLE, isVisible()).forNoMoreThan(30).seconds()
+        );
+         */
+        actor.attemptsTo(
+                WaitUtilElementIsVisible.loginSectionTitle()
         );
         actor.should(
                 seeThat("Page", LoginPageQuestion.loginSectionTitle(),
@@ -67,8 +73,13 @@ public class StepDefinitions {
 
     @And("{actor} should see the warning for a wrong login attempt")
     public void heShouldSeeTheWarningForAWrongLoginAttempt(Actor actor) {
+        /*
         actor.attemptsTo(
                 WaitUntil.the(LoginPage.WRONG_LOGIN_WARNING, isVisible()).forNoMoreThan(30).seconds()
+        );
+         */
+        actor.attemptsTo(
+                WaitUtilElementIsVisible.warningForWrongLoginAttempt()
         );
         actor.should(
                 seeThat("Page", LoginPageQuestion.wrongLoginWarning(),
