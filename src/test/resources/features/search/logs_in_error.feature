@@ -12,5 +12,5 @@ Feature: LogIn - Edge
     Then he should see log in status correctly
 
     Examples:
-      | username             | password  |
-      |uservisac91@gmail.com | D1$ne4ABC    |
+      | username              | password  |
+      | uservisac91@gmail.com | D1$ne4ABC |

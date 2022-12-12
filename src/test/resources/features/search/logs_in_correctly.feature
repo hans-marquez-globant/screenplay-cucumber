@@ -12,5 +12,5 @@ Feature: LogIn
     Then he should see log in status correctly
 
     Examples:
-      | username             | password  |
-      |uservisac91@gmail.com | D1$ne4    |
+      | username              | password  |
+      | uservisac91@gmail.com | D1$ne4    |
