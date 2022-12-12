@@ -11,19 +11,18 @@ import mystore.actions.WaitUtilElementIsVisible;
 import mystore.constants.Constants;
 import mystore.questions.MyAccountPageQuestion;
 import mystore.questions.LoginPageQuestion;
-import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
 public class StepDefinitions {
     @Given("{actor} open my store site")
     public void openSite(Actor actor) {
-        actor.wasAbleTo(NavigateTo.myStoreHomePage());
+        actor.wasAbleTo(
+                NavigateTo.myStoreHomePage()
+        );
     }
 
     @When("{actor} logs in with user {string} and password {string}")
@@ -43,7 +42,7 @@ public class StepDefinitions {
     @When("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
-                WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
+                WaitUtilElementIsVisible.loginForm()
         );
     }
 
@@ -57,32 +56,22 @@ public class StepDefinitions {
 
     @Then("{actor} should see the login section title")
     public void heShouldSeeTheLoginSectionTitle(Actor actor) {
-        /*
-        actor.attemptsTo(
-                WaitUntil.the(LoginPage.LOGIN_PAGE_TITLE, isVisible()).forNoMoreThan(30).seconds()
-        );
-         */
         actor.attemptsTo(
                 WaitUtilElementIsVisible.loginSectionTitle()
         );
         actor.should(
-                seeThat("Page", LoginPageQuestion.loginSectionTitle(),
+                seeThat("Login section title is the expected one", LoginPageQuestion.loginSectionTitle(),
                         equalTo(Constants.LOGIN_PAGE_TITLE))
         );
     }
 
     @And("{actor} should see the warning for a wrong login attempt")
     public void heShouldSeeTheWarningForAWrongLoginAttempt(Actor actor) {
-        /*
-        actor.attemptsTo(
-                WaitUntil.the(LoginPage.WRONG_LOGIN_WARNING, isVisible()).forNoMoreThan(30).seconds()
-        );
-         */
         actor.attemptsTo(
                 WaitUtilElementIsVisible.warningForWrongLoginAttempt()
         );
         actor.should(
-                seeThat("Page", LoginPageQuestion.wrongLoginWarning(),
+                seeThat("A warning is provided for a wrong login attempt", LoginPageQuestion.wrongLoginWarning(),
                         equalTo(Constants.WRONG_LOGIN_WARNING))
         );
     }

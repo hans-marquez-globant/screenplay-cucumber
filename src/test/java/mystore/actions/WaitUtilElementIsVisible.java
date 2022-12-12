@@ -12,11 +12,18 @@ import net.serenitybdd.screenplay.targets.Target;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 public class WaitUtilElementIsVisible implements Task {
-    private final Target element;
+    private Target element;
     private static String desiredElement;
 
     public WaitUtilElementIsVisible(Target element){
         this.element = element;
+    }
+
+    public static Performable loginForm() {
+        desiredElement = "Login form";
+        return Instrumented
+                .instanceOf(WaitUtilElementIsVisible.class)
+                .withProperties(LoginPage.EMAIL);
     }
 
     public static Performable loginSectionTitle() {

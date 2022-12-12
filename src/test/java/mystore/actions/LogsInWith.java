@@ -1,7 +1,6 @@
 package mystore.actions;
 
 import mystore.ui.LoginPage;
-import mystore.ui.MainPage;
 import net.serenitybdd.core.steps.Instrumented;
 import net.serenitybdd.screenplay.*;
 import net.serenitybdd.screenplay.actions.Click;
@@ -33,5 +32,4 @@ public class LogsInWith implements Task {
                 Click.on(LoginPage.SIGN_IN_BUTTON)
         );
     }
-
 }
