@@ -1,5 +1,6 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -7,16 +8,13 @@ import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
 import mystore.constants.Constants;
+import mystore.questions.LoginPage;
 import mystore.questions.MyAccountPage;
-import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -43,7 +41,7 @@ public class StepDefinitions {
     @When("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
-                WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
+                WaitUntil.the(mystore.ui.LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
         );
     }
 
@@ -54,4 +52,23 @@ public class StepDefinitions {
                         equalTo(Constants.LOGIN_STATUS_TITLE))
         );
     }
+
+    @Then("{actor} should see log in title")
+    public void heShouldSeeLogInTitle(Actor actor) {
+        actor.should(
+                seeThat("login title is the expected one", LoginPage.loginTitle(),
+                        equalTo(Constants.LOGIN_TITLE))
+        );
+    }
+
+    @And("{actor} should see error message")
+    public void heShouldSeeErrorMessage(Actor actor) {
+        actor.should(
+                seeThat("error message is the expected one", LoginPage.wrongLoginWarningMessage(),
+                        equalTo(Constants.LOGIN_FAILED_TITLE))
+        );
+
+    }
 }
+
+
