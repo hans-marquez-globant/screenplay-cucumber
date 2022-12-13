@@ -1,5 +1,6 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -7,16 +8,15 @@ import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
 import mystore.constants.Constants;
-import mystore.questions.MyAccountPage;
+import mystore.questions.LoginPageQuestions;
+import mystore.questions.MyAccountPageQuestions;
 import mystore.ui.LoginPage;
+
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -50,8 +50,31 @@ public class StepDefinitions {
     @Then("{actor} should see log in status correctly")
     public void should_see_login_status(Actor actor) {
         actor.should(
-                seeThat("Page", MyAccountPage.loginStatus(),
+                seeThat("Page", MyAccountPageQuestions.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+    @Then("{actor} should see log in status incorrectly")
+    public void should_see_login_status_incorrectly(Actor actor) {
+        actor.should(
+                seeThat("Page", MyAccountPageQuestions.loginStatus(),
+                        equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+
+    @Then("{actor} should see log in title")
+    public void shouldSeeLogInTitle(Actor actor) {
+        actor.should(
+                seeThat("Page", LoginPageQuestions.loginTitle(),
+                        equalTo(Constants.LOGIN_TITLE))
+        );
+    }
+
+    @And("{actor} should see log in incorrect warning")
+    public void shouldSeeLogInIncorrectWarning(Actor actor) {
+        actor.should(
+                seeThat("Page", LoginPageQuestions.IncorrectLoginWarning(),
+                        equalTo(Constants.INCORRECT_LOGIN_WARNING))
         );
     }
 }
