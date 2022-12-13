@@ -54,4 +54,12 @@ public class StepDefinitions {
                         equalTo(Constants.LOGIN_STATUS_TITLE))
         );
     }
+
+    @Then("{actor} should see log in error message")
+    public void shouldSeeLogInErrorMessage(Actor actor) {
+        actor.should(
+                seeThat("Page", LoginPage.loginMessage(),
+                        equalTo(Constants.LOGIN_MESSAGE_ERROR))
+        );
+    }
 }
