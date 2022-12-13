@@ -1,5 +1,6 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -52,6 +53,21 @@ public class StepDefinitions {
         actor.should(
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+
+    @And("{actor} should see the login form title")
+    public void heShouldSeeTheLoginFormTitle(Actor actor) {
+        actor.should(
+                seeThat("Page", mystore.questions.LoginPage.loginTitle(),
+                        equalTo(Constants.LOGIN_FORM_TITLE))
+        );
+    }
+    @Then("{actor} should see an error message")
+    public void heShouldSeeAnErrorMessage(Actor actor) {
+        actor.should(
+                seeThat("Page", mystore.questions.LoginPage.loginError(),
+                        equalTo(Constants.LOGIN_ERROR_TITLE))
         );
     }
 }

@@ -1,15 +1,16 @@
-Feature: LogIn - Edge
+Feature: Cannot LogIn
   Background: Test that every topic
     discussed in screenplay module
     can be applied in this example
 
-  Scenario Outline: User can Log in with errors
+  Scenario Outline: User cannot Log in with incorrect data
     Given Automation open my store site
     When he go to my account section
     Then he wait for login form to be loaded
+    And  he should see the login form title
 
     When he logs in with user "<username>" and password "<password>"
-    Then he should see log in status correctly
+    Then he should see an error message
 
     Examples:
       | username             | password  |
