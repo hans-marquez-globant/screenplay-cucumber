@@ -12,12 +12,10 @@ import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
+
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -41,7 +39,7 @@ public class StepDefinitions {
         );
     }
 
-    @When("{actor} wait for login form to be loaded")
+    @And("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
                 WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
@@ -56,7 +54,7 @@ public class StepDefinitions {
         );
     }
 
-    @And("{actor} should see the login form title")
+    @Then("{actor} should see the login form title")
     public void heShouldSeeTheLoginFormTitle(Actor actor) {
         actor.should(
                 seeThat("Page", mystore.questions.LoginPage.loginTitle(),
