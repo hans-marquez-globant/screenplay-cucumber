@@ -1,4 +1,4 @@
-Feature: LogIn - Edge
+Feature: LogIn with error
   Background: Test that every topic
     discussed in screenplay module
     can be applied in this example
