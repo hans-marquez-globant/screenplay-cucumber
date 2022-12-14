@@ -6,7 +6,9 @@ import io.cucumber.java.en.When;
 import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
+import mystore.actions.SearchToLoginElements;
 import mystore.constants.Constants;
+import mystore.questions.LoginPageHas;
 import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
@@ -42,8 +44,7 @@ public class StepDefinitions {
 
     @When("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
-        actor.attemptsTo(
-                WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
+        actor.attemptsTo(SearchToLoginElements.loginTitle()
         );
     }
 
@@ -52,6 +53,14 @@ public class StepDefinitions {
         actor.should(
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+
+    @Then("{actor} should see log in status incorrectly")
+    public void should_see_login_status_incorrectly(Actor actor) {
+        actor.should(
+                seeThat("Page", LoginPageHas.incorrectLoggWarning(),
+                        equalTo(Constants.INCORRECT_LOGG_WARNING))
         );
     }
 }
