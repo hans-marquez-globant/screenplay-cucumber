@@ -3,20 +3,18 @@ package mystore.stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import mystore.abilities.NavigateTo;
 import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
-import mystore.abilities.NavigateTo;
 import mystore.constants.Constants;
+import mystore.questions.LoginPageQuestions;
 import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -58,7 +56,11 @@ public class StepDefinitions {
     @Then("{actor} should see log in error message")
     public void shouldSeeLogInErrorMessage(Actor actor) {
         actor.should(
-                seeThat("Page", LoginPage.loginMessage(),
+                seeThat("Page", LoginPageQuestions.loginTitle(),
+                        equalTo(Constants.LOGIN_FORM_TITLE))
+        );
+        actor.should(
+                seeThat("Page", LoginPageQuestions.loginMessage(),
                         equalTo(Constants.LOGIN_MESSAGE_ERROR))
         );
     }
