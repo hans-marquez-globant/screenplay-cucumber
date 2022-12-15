@@ -34,5 +34,4 @@ public class LogsInWith implements Task {
                 Click.on(LoginPage.SIGN_IN_BUTTON)
         );
     }
-
 }

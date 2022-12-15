@@ -1,5 +1,6 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,6 +9,7 @@ import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
 import mystore.actions.WaitElementBeDisplayed;
 import mystore.constants.Constants;
+import mystore.questions.LoginPageQuestion;
 import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
@@ -53,6 +55,23 @@ public class StepDefinitions {
         actor.should(
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+
+    ////
+    @Then("{actor} should see log in status error message")
+    public void heShouldSeeLogInStatusErrorMessage(Actor actor) {
+        actor.should(
+                seeThat("Login form throws an error", LoginPageQuestion.loginErrorAlert(),
+                        equalTo(Constants.LOGIN_INCORRECT_CREDENTIALS_ALERT))
+        );
+    }
+
+    @And("{actor} should see login in form title")
+    public void heShouldSeeLoginInFormTitle(Actor actor) {
+        actor.should(
+                seeThat("Login form title", LoginPageQuestion.loginFormTitle(),
+                        equalTo(Constants.LOGIN_FORM_TITLE))
         );
     }
 }
