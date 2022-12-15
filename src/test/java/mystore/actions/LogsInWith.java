@@ -23,7 +23,8 @@ public class LogsInWith implements Task {
                 .instanceOf(LogsInWith.class)
                 .withProperties(user, password);
     }
-    
+
+
     @Override
     @Step("{0} logs into the application")
     public <T extends Actor> void performAs(T actor) {

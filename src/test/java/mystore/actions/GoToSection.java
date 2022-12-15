@@ -13,18 +13,19 @@ public class GoToSection implements Task {
     private Target targetSection;
     private static String chosenSection;
 
-    public GoToSection(Target section){
+    public GoToSection(Target section) {
         this.targetSection = section;
     }
 
-    public static Performable myAccount(){
+    public static Performable myAccount() {
+        //Intrumented es como si hicieramos una nueva instancia new
         chosenSection = "My Account Section";
         return Instrumented
                 .instanceOf(GoToSection.class)
                 .withProperties(MainPage.SECTION_LOGIN);
     }
 
-    public static Performable products(){
+    public static Performable products() {
         chosenSection = "My Products Section";
         return Instrumented
                 .instanceOf(GoToSection.class)

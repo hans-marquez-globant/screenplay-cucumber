@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
+import mystore.actions.WaitElementBeDisplayed;
 import mystore.constants.Constants;
 import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
@@ -43,7 +44,7 @@ public class StepDefinitions {
     @When("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
-                WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
+                WaitElementBeDisplayed.email()
         );
     }
 

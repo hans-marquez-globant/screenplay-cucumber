@@ -8,5 +8,4 @@ public class MyAccountPage {
    public static Question<String> loginStatus() {
        return actor -> Text.of(mystore.ui.MyAccountPage.LOGIN_STATUS).answeredBy(actor);
     }
-
 }
