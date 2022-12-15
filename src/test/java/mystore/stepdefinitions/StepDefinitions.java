@@ -1,13 +1,16 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
+import mystore.actions.WaitElements;
 import mystore.constants.Constants;
 import mystore.questions.MyAccountPage;
+import mystore.questions.MyLoginPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
@@ -43,8 +46,15 @@ public class StepDefinitions {
     @When("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
-                WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
+                WaitElements.loginInputs()
         );
+    }
+
+    @And("{actor} should see login to your account title")
+    public void should_see_login_to_your_account_title(Actor actor){
+        actor.attemptsTo(WaitElements.loginTitle());
+        actor.should(seeThat("Login to your account", MyLoginPage.loginTitle(),
+                equalTo(Constants.LOGIN_TITLE)));
     }
 
     @Then("{actor} should see log in status correctly")
@@ -53,5 +63,12 @@ public class StepDefinitions {
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
         );
+    }
+
+    @And("{actor} should see the wrong credentials warning")
+    public void should_see_the_wrong_credentials_warning(Actor actor){
+        actor.attemptsTo(WaitElements.wrongCredentialsWarning());
+        actor.should(seeThat("Credentials wrong attempt warning", MyLoginPage.wrongCredentials(),
+                equalTo(Constants.LOGIN_ERROR_ADVICE)));
     }
 }

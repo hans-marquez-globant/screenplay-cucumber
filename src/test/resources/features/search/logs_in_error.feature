@@ -9,7 +9,9 @@ Feature: LogIn - Edge
     Then he wait for login form to be loaded
 
     When he logs in with user "<username>" and password "<password>"
+    And he should see login to your account title
     Then he should see log in status correctly
+    And he should see the wrong credentials warning
 
     Examples:
       | username             | password  |
