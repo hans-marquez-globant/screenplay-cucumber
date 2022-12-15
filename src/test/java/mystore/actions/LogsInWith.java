@@ -9,7 +9,7 @@ import net.serenitybdd.screenplay.actions.Enter;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.Keys;
 
-public class LogsInWith implements Task {
+public class    LogsInWith implements Task {
     private final String user;
     private final String password;
 

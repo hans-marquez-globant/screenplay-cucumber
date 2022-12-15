@@ -54,4 +54,16 @@ public class StepDefinitions {
                         equalTo(Constants.LOGIN_STATUS_TITLE))
         );
     }
+
+    @Then("{actor} should see log in status failed")
+    public void heShouldSeeLogInStatusFailed(Actor actor) {
+        actor.should(
+                seeThat("Page", MyAccountPage.failedLoginStatus(),
+                        equalTo(Constants.INCORRECT_LOGIN_STATUS))
+        );
+        actor.should(
+                seeThat("Page", MyAccountPage.loginTitle(),
+                        equalTo(Constants.INCORRECT_PAGE_TITLE))
+        );
+    }
 }
