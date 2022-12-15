@@ -18,7 +18,6 @@ public class GoToSection implements Task {
     }
 
     public static Performable myAccount() {
-        //Intrumented es como si hicieramos una nueva instancia new
         chosenSection = "My Account Section";
         return Instrumented
                 .instanceOf(GoToSection.class)
