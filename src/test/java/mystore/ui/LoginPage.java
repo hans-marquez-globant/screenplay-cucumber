@@ -8,5 +8,5 @@ public class LoginPage {
     public static Target PASSWORD = Target.the("Password input").located(By.cssSelector("[data-qa='login-password']"));
     public static Target SIGN_IN_BUTTON = Target.the("Sign In button").located(By.cssSelector("[data-qa='login-button']"));
     public static Target LOGIN_TITLE = Target.the("Login title").located(By.cssSelector(".login-form>h2"));
-    public static Target WRONG_CREDENTIALS_MESSAGE = Target.the("Wrong login credentials message").located(By.cssSelector(".login-form>p"));
+    public static Target WRONG_CREDENTIALS_MESSAGE = Target.the("Wrong login credentials message").located(By.cssSelector(".login-form> form> p"));
 }

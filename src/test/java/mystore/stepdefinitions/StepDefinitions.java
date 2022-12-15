@@ -12,12 +12,9 @@ import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -59,12 +56,16 @@ public class StepDefinitions {
     @Then("{actor} should see the log in title")
     public void heShouldSeeTheLogInTitle(Actor actor) {
         actor.should(
-                seeThat("Page", MyAccountPage.loginStatus(),
-                        equalTo(Constants.LOGIN_STATUS_TITLE))
+                seeThat("Login page", mystore.questions.LoginPage.loginTitle(),
+                        equalTo(Constants.LOGIN_TITLE))
         );
     }
 
     @And("{actor} should see the wrong credentials message")
-    public void heShouldSeeTheWrongCredentialsMessage() {
+    public void heShouldSeeTheWrongCredentialsMessage(Actor actor) {
+        actor.should(
+                seeThat("Login page", mystore.questions.LoginPage.wrongCredentialsMessage(),
+                        equalTo(Constants.WRONG_LOGIN_MESSAGE))
+        );
     }
 }
