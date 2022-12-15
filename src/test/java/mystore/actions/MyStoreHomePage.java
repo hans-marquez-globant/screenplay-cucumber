@@ -4,5 +4,5 @@ import mystore.constants.Constants;
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
 
-@DefaultUrl(Constants.PAGINA_SIGN_IN)
+@DefaultUrl(Constants.SIGN_IN_PAGE)
 public class MyStoreHomePage extends PageObject {}
