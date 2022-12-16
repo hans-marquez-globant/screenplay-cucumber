@@ -1,5 +1,6 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -40,7 +41,7 @@ public class StepDefinitions {
         );
     }
 
-    @When("{actor} wait for login form to be loaded")
+    @Then("{actor} waits for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
                 WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
@@ -52,6 +53,24 @@ public class StepDefinitions {
         actor.should(
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+
+
+    @And("{actor} can see the title Login to your account")
+    public void shouldSeeTheLoginTitle(Actor actor) {
+        actor.should(
+                seeThat("Page", mystore.questions.LoginPage.loginToYourAccountTitle(),
+                        equalTo(Constants.LOGIN_TO_YOUR_ACCOUNT_TITLE))
+        );
+    }
+
+
+    @Then("{actor} can see the error called Your email or password is incorrect!")
+    public void shouldSeeTheLoginError(Actor actor) {
+        actor.should(
+                seeThat("Page", mystore.questions.LoginPage.loginToYourAccountError(),
+                        equalTo(Constants.LOGIN_ERROR_TITLE))
         );
     }
 }

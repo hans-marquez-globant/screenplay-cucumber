@@ -9,4 +9,5 @@ public class MyAccountPage {
        return actor -> Text.of(mystore.ui.MyAccountPage.LOGIN_STATUS).answeredBy(actor);
     }
 
+
 }
