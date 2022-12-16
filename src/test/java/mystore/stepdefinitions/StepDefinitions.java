@@ -1,5 +1,6 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -47,11 +48,13 @@ public class StepDefinitions {
         );
     }
 
-    @Then("{actor} should see log in status correctly")
-    public void should_see_login_status(Actor actor) {
-        actor.should(
-                seeThat("Page", MyAccountPage.loginStatus(),
-                        equalTo(Constants.LOGIN_STATUS_TITLE))
-        );
+    @Then("he should see a logging title")
+    public void heShouldSeeALoggingTitle() {
+        System.out.printf("he should see a logging title");
+    }
+
+    @And("he should see warning message")
+    public void heShouldSeeWarningMessage() {
+        System.out.printf("he should see warning message");
     }
 }
