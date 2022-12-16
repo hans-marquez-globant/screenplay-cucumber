@@ -1,22 +1,21 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
+import mystore.actions.WaitForElementVisible;
 import mystore.constants.Constants;
+import mystore.questions.LoginPageWithErrorMessage;
 import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
+
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -43,7 +42,7 @@ public class StepDefinitions {
     @When("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
-                WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
+                WaitForElementVisible.isElementVisible(LoginPage.EMAIL)
         );
     }
 
@@ -52,6 +51,22 @@ public class StepDefinitions {
         actor.should(
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+
+    @Then("{actor} should see login error message")
+    public void ShouldSeeLogInErrorMessage(Actor actor) {
+        actor.should(
+                seeThat("Login form has an error message", LoginPageWithErrorMessage.loginErrorMessage(),
+                        equalTo(Constants.LOGIN_ERROR_MESSAGE))
+        );
+    }
+
+    @And("{actor} should see login form title")
+    public void ShouldSeeLogInFormTitle(Actor actor) {
+        actor.should(
+                seeThat("Login form title", LoginPageWithErrorMessage.loginFormTitle(),
+                        equalTo(Constants.LOGIN_FORM_TITLE))
         );
     }
 }
