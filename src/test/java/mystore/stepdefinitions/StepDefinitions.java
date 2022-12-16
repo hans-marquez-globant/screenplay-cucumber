@@ -48,13 +48,19 @@ public class StepDefinitions {
         );
     }
 
-    @Then("he should see a logging title")
-    public void heShouldSeeALoggingTitle() {
-        System.out.printf("he should see a logging title");
+    @Then("{actor} should see a logging title")
+    public void ShouldSeeALoggingTitle(Actor actor) {
+        actor.should(
+                seeThat("Login title", mystore.questions.LoginPage.loginTitle(),
+                        equalTo(Constants.LOGIN_TO_YOUR_ACCOUNT))
+        );
     }
 
-    @And("he should see warning message")
-    public void heShouldSeeWarningMessage() {
-        System.out.printf("he should see warning message");
+    @And("{actor} should see warning message")
+    public void ShouldSeeWarningMessage(Actor actor) {
+        actor.should(
+                seeThat("Warning message", mystore.questions.LoginPage.warningMessage(),
+                        equalTo(Constants.WRONG_EMAIL_PASSWORD))
+        );
     }
 }
