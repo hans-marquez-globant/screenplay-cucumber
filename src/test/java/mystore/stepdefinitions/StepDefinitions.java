@@ -3,6 +3,7 @@ package mystore.stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.And;
 import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
@@ -12,12 +13,9 @@ import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -49,12 +47,13 @@ public class StepDefinitions {
     }
 
     @Then("{actor} should see log in status correctly")
-    public void shouldSeeLoginStatus(Actor actor) {
+    public void shouldSeeLoginCorrectStatus(Actor actor) {
         actor.should(
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
         );
     }
+
 
     @Then("{actor} should be see log in warning message")
     public void shouldSeeLoginWarning(Actor actor) {
@@ -64,11 +63,11 @@ public class StepDefinitions {
         );
     }
 
-    @Then("{actor} should be see log in title")
+    @And("{actor} should be see log in title")
     public void shouldBeSeeLoginTitle(Actor actor) {
         actor.should(
-        seeThat("Page", LoginPageWarn.loginFormTitle(),
-        equalTo(Constants.LOGIN_TITLE))
+            seeThat("Page", LoginPageWarn.loginFormTitle(),
+                         equalTo(Constants.LOGIN_TITLE))
         );
     }
 }

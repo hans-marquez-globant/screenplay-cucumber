@@ -13,7 +13,7 @@ public class LoginPage {
     public static Target LOGIN_WARNING_STATUS = Target.the("Incorrect login warning").
             located(By.cssSelector(".login-form p"));
 
-    public static Target LOGIN_TITLE = Target.the("Login Title").
-            located(By.cssSelector("login-form h2"));
+    public static Target LOGIN_TITLE = Target.the("Login title").
+            located(By.cssSelector(".login-form h2"));
 
 }
