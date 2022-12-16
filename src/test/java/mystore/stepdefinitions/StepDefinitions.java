@@ -3,55 +3,59 @@ package mystore.stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import mystore.actions.GoToSection;
+import mystore.constants.Constants;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
-import mystore.constants.Constants;
 import mystore.questions.MyAccountPage;
+import mystore.questions.QuestionLoginPage;
+import mystore.ui.MainPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Question;
+import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.BlurScreenshots;
 
+
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
 public class StepDefinitions {
-    @Given("{actor} open my store site")
+    @Given("{actor} open Homepage")
     public void openSite(Actor actor) {
         actor.wasAbleTo(NavigateTo.myStoreHomePage());
     }
 
-    @When("{actor} logs in with user {string} and password {string}")
-    public void LogsInWith(Actor actor, String username, String password) {
+    @When("{actor} click on login")
+    public void heClickOnLogin(Actor actor) {
         actor.attemptsTo(
-                LogsInWith.credentials(username, password)
+                Click.on(MainPage.SECTION_LOGIN)
         );
     }
 
-    @When("{actor} go to my account section")
-    public void goToAccountSection(Actor actor) {
-        actor.attemptsTo(
-                GoToSection.myAccount()
-        );
-    }
-
-    @When("{actor} wait for login form to be loaded")
+    @Then("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
                 WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
         );
     }
 
-    @Then("{actor} should see log in status correctly")
-    public void should_see_login_status(Actor actor) {
+    @When("{actor} logs in with user {string} and password {string}")
+    public void LogsInWith(Actor actor, String email, String password) {
+        actor.attemptsTo(
+                LogsInWith.credentials(email, password)
+        );
+    }
+
+    @Then("{actor} should see incorrect email")
+    public void shouldSeeIncorrectEmail(Actor actor) {
         actor.should(
-                seeThat("Page", MyAccountPage.loginStatus(),
-                        equalTo(Constants.LOGIN_STATUS_TITLE))
+                seeThat("Incorrect email or password", QuestionLoginPage.loginStatus(),
+                        equalTo(Constants.WRONG_EMAIL_PASSWORD))
         );
     }
 }

@@ -24,13 +24,6 @@ public class GoToSection implements Task {
                 .withProperties(MainPage.SECTION_LOGIN);
     }
 
-    public static Performable products(){
-        chosenSection = "My Products Section";
-        return Instrumented
-                .instanceOf(GoToSection.class)
-                .withProperties(MainPage.SECTION_PRODUCTS);
-    }
-
     @Override
     @Step("{0} decide navigate to section: #chosenSection")
     public <T extends Actor> void performAs(T actor) {

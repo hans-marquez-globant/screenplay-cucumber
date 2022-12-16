@@ -6,7 +6,7 @@ import net.serenitybdd.screenplay.questions.Text;
 public class MyAccountPage {
 
    public static Question<String> loginStatus() {
-       return actor -> Text.of(mystore.ui.MyAccountPage.LOGIN_STATUS).answeredBy(actor);
+       return actor -> Text.of(mystore.ui.LoginPage.INCORRECT_EMAIL).answeredBy(actor);
     }
 
 }
