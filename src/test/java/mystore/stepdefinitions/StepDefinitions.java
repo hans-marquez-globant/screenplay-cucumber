@@ -12,12 +12,9 @@ import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -51,7 +48,7 @@ public class StepDefinitions {
     @Then("{actor} should see log in status correctly")
     public void should_see_login_status(Actor actor) {
         actor.should(
-                seeThat("Page", MyAccountPage.loginStatus(),
+                seeThat("User should see log in status correctly", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
         );
     }
@@ -60,7 +57,7 @@ public class StepDefinitions {
     @And("{actor} can see the title Login to your account")
     public void shouldSeeTheLoginTitle(Actor actor) {
         actor.should(
-                seeThat("Page", mystore.questions.LoginPage.loginToYourAccountTitle(),
+                seeThat("User should see the title Login to your account", mystore.questions.LoginPage.loginToYourAccountTitle(),
                         equalTo(Constants.LOGIN_TO_YOUR_ACCOUNT_TITLE))
         );
     }
@@ -69,7 +66,7 @@ public class StepDefinitions {
     @Then("{actor} can see the error called Your email or password is incorrect!")
     public void shouldSeeTheLoginError(Actor actor) {
         actor.should(
-                seeThat("Page", mystore.questions.LoginPage.loginToYourAccountError(),
+                seeThat("User should see the title Login to your account", mystore.questions.LoginPage.loginToYourAccountError(),
                         equalTo(Constants.LOGIN_ERROR_TITLE))
         );
     }
