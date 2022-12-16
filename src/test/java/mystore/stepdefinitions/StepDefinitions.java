@@ -11,6 +11,7 @@ import mystore.actions.WaitForElementDisplayed;
 import mystore.constants.Constants;
 import mystore.questions.LoginPageQuestion;
 import mystore.questions.MyAccountPage;
+import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -40,7 +41,7 @@ public class StepDefinitions {
     @And("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
-                WaitForElementDisplayed.email()
+                WaitForElementDisplayed.isElementDisplayed(LoginPage.EMAIL)
         );
     }
 
