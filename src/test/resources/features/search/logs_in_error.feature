@@ -10,7 +10,7 @@ Feature: LogIn - Edge
 
     When he logs in with user "<username>" and password "<password>"
     Then he should see a logging title
-    And he should see warning message
+    And he should see a warning message
 
     Examples:
       | username             | password  |

@@ -56,8 +56,8 @@ public class StepDefinitions {
         );
     }
 
-    @And("{actor} should see warning message")
-    public void ShouldSeeWarningMessage(Actor actor) {
+    @And("{actor} should see a warning message")
+    public void heShouldSeeAWarningMessage(Actor actor) {
         actor.should(
                 seeThat("Warning message", mystore.questions.LoginPage.warningMessage(),
                         equalTo(Constants.WRONG_EMAIL_PASSWORD))
