@@ -7,6 +7,7 @@ import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
 import mystore.abilities.NavigateTo;
 import mystore.constants.Constants;
+import mystore.questions.LoginPageWarn;
 import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
@@ -48,10 +49,26 @@ public class StepDefinitions {
     }
 
     @Then("{actor} should see log in status correctly")
-    public void should_see_login_status(Actor actor) {
+    public void shouldSeeLoginStatus(Actor actor) {
         actor.should(
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+
+    @Then("{actor} should be see log in warning message")
+    public void shouldSeeLoginWarning(Actor actor) {
+        actor.should(
+                seeThat("Page", LoginPageWarn.loginWarningStatus(),
+                        equalTo(Constants.LOGIN_WARNING_STATUS))
+        );
+    }
+
+    @Then("{actor} should be see log in title")
+    public void shouldBeSeeLoginTitle(Actor actor) {
+        actor.should(
+        seeThat("Page", LoginPageWarn.loginFormTitle(),
+        equalTo(Constants.LOGIN_TITLE))
         );
     }
 }
