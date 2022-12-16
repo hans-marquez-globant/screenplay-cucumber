@@ -7,15 +7,13 @@ import io.cucumber.java.en.When;
 import mystore.abilities.NavigateTo;
 import mystore.actions.GoToSection;
 import mystore.actions.LogsInWith;
+import mystore.actions.WaitForElementDisplayed;
 import mystore.constants.Constants;
 import mystore.questions.LoginPageQuestion;
 import mystore.questions.MyAccountPage;
-import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -42,7 +40,7 @@ public class StepDefinitions {
     @And("{actor} wait for login form to be loaded")
     public void waitLoadedResults(Actor actor) {
         actor.attemptsTo(
-                WaitUntil.the(LoginPage.EMAIL, isVisible()).forNoMoreThan(30).seconds()
+                WaitForElementDisplayed.email()
         );
     }
 
@@ -65,7 +63,7 @@ public class StepDefinitions {
     @Then("{actor} should see a warning message for wrong credentials")
     public void heShouldSeeAWarningMessageForWrongCredentials(Actor actor) {
         actor.should(
-                seeThat("Login form tittle", LoginPageQuestion.loginWarningMessage(),
+                seeThat("Warning login message for wrong credentials", LoginPageQuestion.loginWarningMessage(),
                         equalTo(Constants.LOGIN_WARNING_MESSAGE))
         );
     }
