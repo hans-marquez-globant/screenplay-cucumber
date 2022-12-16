@@ -1,5 +1,6 @@
 package mystore.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,12 +12,9 @@ import mystore.questions.MyAccountPage;
 import mystore.ui.LoginPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.waits.WaitUntil;
-import net.thucydides.core.annotations.BlurScreenshots;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-import static net.thucydides.core.screenshots.BlurLevel.HEAVY;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -48,10 +46,25 @@ public class StepDefinitions {
     }
 
     @Then("{actor} should see log in status correctly")
-    public void should_see_login_status(Actor actor) {
+    public void shouldSeeLoginStatus(Actor actor) {
         actor.should(
                 seeThat("Page", MyAccountPage.loginStatus(),
                         equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+    @Then("{actor} should see the login section title")
+    public void shouldSeeTheLoginSectionTitle(Actor actor) {
+        actor.should(
+                seeThat("Login section title is the expected one", mystore.questions.LoginPage.loginsTitle(),
+                        equalTo(Constants.LOGIN_TITLE))
+        );
+    }
+
+    @And("{actor} should see the warning for a wrong login attempt")
+    public void heShouldSeeTheWarningForAWrongLoginAttempt(Actor actor) {
+        actor.should(
+                seeThat("A warning is provided for a wrong login attempt", mystore.questions.LoginPage.loginStatusFailed(),
+                        equalTo(Constants.LOGIN_INCORRECT_TEXT))
         );
     }
 }
