@@ -48,6 +48,14 @@ public class StepDefinitions {
         );
     }
 
+    @Then("{actor} should see log in status correctly")
+    public void should_see_login_status(Actor actor) {
+        actor.should(
+                seeThat("Page", MyAccountPage.loginStatus(),
+                        equalTo(Constants.LOGIN_STATUS_TITLE))
+        );
+    }
+
     @Then("{actor} should see a logging title")
     public void ShouldSeeALoggingTitle(Actor actor) {
         actor.should(
